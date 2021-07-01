@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mila Tequila</title>
+    <style>
+    .btn {
+        display: inline-block;
+        margin-bottom: 0;
+        text-align: center;
+        text-transform: uppercase;
+        vertical-align: middle;
+        cursor: pointer;
+        background-image: none;
+        whitespace: nowrap;
+        padding: 6px 12px;
+        font-size: 1.4rem;
+        border-radius: 3px;
+        border: 1px solid transparent;
+        text-decoration: none;
+        user-select: none;
+        
+        &,
+        &:active,
+        &.active {
+          &:focus {
+            outline: thin dotted;
+            outline: 5px auto -webkit-focus-ring-color;
+            outline-offset: -2px;
+          }
+        }
+        
+        &:hover,
+        &:focus,
+        &.focus {
+          text-decoration: none;
+          color: #fff;
+        }
+        
+        &:active,
+        &.active {
+          outline: 0;
+          background-image: none;
+        }
+        
+        &.disabled,
+        &[disabled],
+        fieldset[disabled] & {
+          cursor: not-allowed;
+          pointer-events: none;
+          box-shadow: none;
+        }
+        
+        &.btn-xs {
+          padding: 3px 6px;
+          font-size: 1.2rem;
+        }
+        
+        &.btn-sm {
+          padding: 4px 8px;
+          font-size: 1.3rem;
+        }
+        
+        &.btn-lg {
+          padding: 8px 16px;
+          font-size: 1.6rem;
+        }
+      }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+</head>
+
+<body>
+    <section class="hero is-primary is-fullheight">
+
+        <div class="hero-head">
+            <nav class="navbar">
+                <div class="container">
+
+                    <div id="navbarMenuHeroA" class="navbar-menu">
+                        <div class="navbar-end">
+                            <a href="{{ url_for('main.index') }}" class="navbar-item">
+                                Home
+                            </a>
+                            {% if current_user.is_authenticated %}
+                            <a href="{{ url_for('main.profile') }}" class="navbar-item">
+                                Profile
+                            </a>
+                            <a href="{{ url_for('main.watch') }}" class="navbar-item">
+                                Spy on Mila
+                            </a>
+                            {% endif %}
+                            {% if not current_user.is_authenticated %}
+                            <a href="{{ url_for('auth.login') }}" class="navbar-item">
+                                Login
+                            </a>
+                            {% endif %}
+                            {% if current_user.is_authenticated %}
+                            <a href="{{ url_for('auth.signup') }}" class="navbar-item">
+                                Sign Up New User
+                            </a>
+                            <a href="{{ url_for('auth.logout') }}" class="navbar-item">
+                                Logout
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <div class="hero-body">
+            <div class="container has-text-centered">
+               {% block content %}
+               {% endblock %}
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
